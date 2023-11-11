@@ -1,0 +1,35 @@
+<!--Главная страница биобанка!-->
+
+{% extends 'biobank/biobank_layout.html' %}
+
+{% block title %}Хранилище{% endblock %}
+
+{% block content %}
+<div class="title_object">
+    <p>
+        <span class="larger-text">Морозилка</span>
+        <a href="{% url 'create_shelf' freezer_id=freezer_id %}">
+            <button>Добавить ящик</button>
+        </a>
+        
+    </p>
+</div>
+    <div class="features">
+        <table>
+            <!-- Заголовки столбцов -->
+            <thead>
+                <tr>
+                    <td class="property-cell">Название</td>
+                </tr>
+            </thead>
+            <!-- Итерируемые строки биологических образцов, получаемых из БД -->
+            <tbody>
+                {% for shelf in shelfs %}
+                    <tr>
+                        <td><a href="{% url 'shelf_view' freezer_id=freezer_id shelf_id=shelf.id %}">{{ shelf.title }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    </div>
+{% endblock %}

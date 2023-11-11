@@ -1,0 +1,43 @@
+<!--Страница зарегистрированных биологических образцов-->
+
+{% extends 'biobank/biobank_layout.html' %}
+
+{% block title %}Проект{% endblock %}
+{% block content %}
+<div class="create_users">
+    Создать пользователей
+    <ul>
+        <li><a href="{%url 'create_project_admin' %}">Создать админа проекта</a></li>
+        <li><a href="{%url 'create_project_assistant' %}">Создать лаборанта</a></li>
+    </ul>
+</div>
+<div class="title_object">
+    <p>
+        <span class="larger-text">{{ project.title }}</span>
+        <a href="{% url 'project_update' project_id=project.id %}">
+            <button>Изменить</button>
+        </a>
+        
+    </p>
+</div>
+<div class="features">
+    <!-- Вывод таблицы о существующих биологических образцах -->
+    <table>
+        <!-- Итерируемые строки биологических образцов, получаемых из БД -->
+        <tbody>
+                <tr>
+                    <td class="table_property">Название</td>
+                    <td class="table_value">{{ project.title }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Описание</td>
+                    <td class="table_value">{{ project.description }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Тестовое поле</td>
+                    <td class="table_value">{{ project.test_field }}</td>
+                </tr>
+        </tbody>
+    </table>   
+</div>
+{% endblock %}

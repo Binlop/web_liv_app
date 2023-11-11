@@ -1,0 +1,23 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Рассчитать длину ДНК{% endblock %}
+
+{% block content %}
+    <div class="sub-instruments">
+        <h1>Узнать длину ДНК</h1>
+        <form method="post">
+            {% csrf_token %} {#Токен необходим для доставки формы до базы данных#}
+            <!--Создаем разделы формы на сайте, подключаем разделы из словаря в forms.py-->
+            {{form.sequence}}<br>
+
+            <!--Отдельное место на странице для вывода ошибки создания формы-->
+            <span>{{ error }}</span>
+
+            <!--Создание кнопки для подтверждения действия сохранить, обязателен тип submit-->
+            <button class="btn btn-success" type="submit">Узнать длину ДНК</button>
+        </form><br>
+        {% if processed_data %}
+        <p>Длина ДНК: {{ processed_data }} нуклеотидов</p>
+        {% endif %}
+    </div>
+{% endblock %}

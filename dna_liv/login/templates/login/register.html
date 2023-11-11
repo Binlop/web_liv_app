@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <form method="POST" class="login-page">
+      {% csrf_token %} {#Токен необходим для доставки формы до базы данных#}
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <input name="username" type="text" id="form2Example1" class="form-control" />
+        <label class="form-label" for="form2Example1">Электронная почта</label>
+      </div>
+    
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input name="password1" type="password" id="form2Example2" class="form-control" />
+        <label class="form-label" for="form2Example2">Пароль</label>
+      </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input name="password2" type="password" id="form2Example2" class="form-control" />
+            <label class="form-label" for="form2Example2">Повторите пароль</label>
+        </div>
+    
+      <!-- 2 column grid layout for inline styling -->
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+          <!-- Checkbox -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+            <label class="form-check-label" for="form2Example31"> Remember me </label>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
+
+    </form>
+    <link rel="stylesheet" href="{% static 'login/css/login.css' %}" />
+
+{% endblock %}

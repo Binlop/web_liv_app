@@ -1,0 +1,31 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Новости{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>
+            {{ title }}
+        </h1>
+        {% filter upper %}
+        <p>Добро пожаловать на новости платформы W_VI</p>
+        {% endfilter %}
+<!--        Проверяем наличие элементов в таблице news в БД-->
+        {% if news%}
+            {% for el in news %}
+                <div class="alert alert-warning"> {#Создаем для каждой новости блок и указываем стиль#}
+<!--                    Выводим в блоке поочередно элементы новости-->
+                    <h3>{{el.title}}</h3>
+                    <p>{{el.anons}}</p>
+                    <p>{{el.text}}</p>
+                    <p>{{el.data_publication}}</p>
+                    <p><a href="{% url 'news_detail' el.id %}" class="btn btn-warning">Читать подробнее</a></p>
+                </div>
+            {% endfor %}
+        {% else %}
+<!--        Если таблица с новостями пустая-->
+            <p>Нет на сайте записей</p>
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load static %} {#Указываю, что будут использоваться статические файлы#}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title%}{% endblock %}</title>
+<!--    Подключаем все стили с boostrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<!--    Подлючаем статистические файлы(css, js, img)-->
+    <link rel="stylesheet" href="{% static 'biobank/css/biobank.css' %}">
+    <link rel="stylesheet" href="{% static 'biobank/css/storage.css' %}">
+
+</head>
+
+<body>
+<!--Создание отдельного блока для расположения логотипа платформы"-->
+<div class="header">
+    <div class="logo">
+        <img src="{% static 'main/img/logo.png' %}" alt="Логотип платформы">
+        <a>W-VI</a>
+    </div>
+    <!-- Создание шапки сайта, указываем ссылки на другие страницы -->
+    <div class="center-panel">
+        <a href="{% url 'home'%}">Домик</a>
+        <a href="{% url 'biobank_home'%}">Биобанк</a>
+        <a href="{% url 'contacts' %}">Помощь</a>
+        <a href="{% url 'about'%}">О нас</a>
+    </div>
+    <!-- Выделение блока под регистрацию/вход или имя пользователя, а также проверка на него -->
+    <div class="login">
+        {%if username%}
+            <span id="username">{{ username }}</span>
+            <!-- Отображение кнопок "Профиль" и "Выход". НЕРАБОЧИЕ -->
+            <div class="user-actions hidden">
+                <button id="profile-button" class="hidden">Профиль</button>
+                <a href="{%url 'logout'%}"></style>Выйти</a>
+            </div>
+    
+        <!-- Если клиент не авторизирован - ссылка на вход/регистрацию -->
+        {% else %}
+        <a class="login" href="{% url 'login'%}">Вход/регистрация</a>
+        {% endif %}
+        </div>
+</div>
+
+    <!--Создаем левый боковой блок-->
+    <aside>
+        <!--Создание отдельного блока для надписи Панель инструментов. Необходимо убрать-->
+        <div class="panel">
+            <!-- <h3><span class="bar_name">Панель инструментов</span></h3> -->
+        </div>
+        <!--Подключаем блок разделов биообанка-->
+        <div class="instruments">
+            <p><span class="name_instruments">Разделы биобанка </span></p>
+            <ul>
+                <a href="{% url 'list_biospecimens'%}"><li><i class="fa-regular fa-house"></i>Биологические образцы</li></a>
+                <a href="{% url 'storage_view'%}"><li><i class="fa-regular fa-house"></i>Хранилище</li></a>
+                <a href="{% url 'list_projects'%}"><li><i class="fa-regular fa-house"></i>Проекты</li></a>
+                <a href="{% url 'list_laboratories'%}"><li><i class="bi bi-search"></i>Лаборатории</li></a>
+                <a href="{% url 'contacts'%}"><li><i class="fa-solid fa-phone"></i>Типы образцов</li></a>
+            </ul>
+            <!--Отключаем подчеркивание у элементов списка-->
+            <style>
+                a {
+              text-decoration: none;
+                    }
+            </style>
+        </div>
+    </aside>
+    <main>
+<!--        Создаем отдельный основной блок для контента страницы-->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

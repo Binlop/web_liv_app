@@ -1,0 +1,44 @@
+<!--Страница зарегистрированных биологических образцов-->
+
+{% extends 'biobank/biobank_layout.html' %}
+
+{% block title %}Лаборатория{% endblock %}
+{% block content %}
+<div class="create_users">
+    Создать пользователей
+    <ul>
+        <li><a href="{%url 'create_lab_admin' %}">Создать админа лабы</a></li>
+        <li><a href="{%url 'create_project_admin' %}">Создать админа проекта</a></li>
+        <li><a href="{%url 'create_project_assistant' %}">Создать лаборанта</a></li>
+    </ul>
+</div>
+<div class="title_object">
+    <p>
+        <span class="larger-text">{{ laboratory.title }}</span>
+        <a href="{% url 'lab_update' laboratory_id=laboratory.id %}">
+            <button>Изменить</button>
+        </a>
+        
+    </p>
+</div>
+<div class="features">
+    <!-- Вывод таблицы о существующих биологических образцах -->
+    <table>
+        <!-- Итерируемые строки биологических образцов, получаемых из БД -->
+        <tbody>
+                <tr>
+                    <td class="table_property">Название</td>
+                    <td class="table_value">{{ laboratory.title }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Заведующий лабораторией</td>
+                    <td class="table_value">{{ laboratory.head_lab }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Тестовое поле</td>
+                    <td class="table_value">{{ laboratory.test_field }}</td>
+                </tr>
+        </tbody>
+    </table>   
+</div>
+{% endblock %}

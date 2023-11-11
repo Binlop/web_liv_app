@@ -1,0 +1,20 @@
+{% extends 'biobank/biobank_layout.html' %}
+
+{% block title %}Создать пользователя{% endblock %}
+
+{% block content %}
+    <div class="create_lab_admin">
+        <h1>Создать админа проекта</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {#Токен необходим для доставки формы до базы данных#}
+            <!--Создаем разделы формы на сайте, подключаем разделы из словаря в forms.py-->
+            {{ form.as_p }}
+            <!--Отдельное место на странице для вывода ошибки создания формы-->
+            <span>{{ error }}</span>
+
+            <!--Создание кнопки для подтверждения действия сохранить, обязателен тип submit-->
+            <button class="btn btn-success" type="submit">Добавить админа проекта</button>
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!--Страница зарегистрированных биологических образцов-->
+
+{% extends 'biobank/biobank_layout.html' %}
+
+{% block title %}Проекты{% endblock %}
+{% block content %}
+
+<div class="title_object">
+    <p>
+        <span class="larger-text">Проекты</span>
+        <a href="{% url 'create_project' %}">
+            <button>Добавить</button>
+        </a>
+        
+    </p>
+</div>
+<div class="features">
+    <!-- Вывод таблицы о существующих биологических образцах -->
+    <table>
+        <thead>
+            <tr>
+                <td class="property-cell">Название</td>
+                <td class="value-cell">Тестовое поле</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td><a href="{% url 'single_project' project_id=project.id%}">{{ project.title }}</a></td>
+                    <td>{{ project.test_field }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     
+</div>
+{% endblock %}

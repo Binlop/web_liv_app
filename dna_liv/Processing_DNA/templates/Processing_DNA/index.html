@@ -1,0 +1,13 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Обработка ДНК{% endblock %}
+
+{% block content %}
+   <div class="sub-instruments">
+        <h1>Функции</h1>
+        <ul>
+            <a href="{% url 'dna_analysis'%}">Узнать характеристики ДНК</a><br>
+            <a href="{% url 'alignment'%}">Выравнивание ДНК</a>
+        </ul>
+    </div>
+{% endblock %}

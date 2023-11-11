@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Рассчитать длину ДНК{% endblock %}
+
+{% block content %}
+    <div class="sub-instruments">
+        <h1>Узнать длину ДНК</h1>
+
+        {% for file in all_files %}
+            <a href="{{file.file.url}}" download>{{file.text}}</a><br>
+        {%endfor%}
+    
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Загрузите ваш fasta файл</p>
+            {{ form.as_p }}
+            <button class="btn btn-success" type="submit">Запустить выравнивание ДНК</button>
+        </form>
+        
+
+    </div>
+{% endblock %}

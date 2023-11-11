@@ -1,0 +1,50 @@
+<!--Главная страница биобанка!-->
+{% extends 'biobank/biobank_layout.html' %}
+
+
+{% block title %}Хранилище{% endblock %}
+
+{% block content %}
+        <div class="title_object">
+            <p>
+                <span class="larger-text">Коробка</span>
+                <a href="{% url 'create_sample' freezer_id=freezer_id shelf_id=shelf_id box_id=box_id%}">
+                    <button>Добавить карту образцов</button>
+                </a>
+                
+            </p>
+        </div>
+        <div class="samples">
+            <table class="sample-statistic">
+                <tr>
+                    <th>Всего</th><td>{{all_samples}}</td>
+                </tr>
+                <tr>
+                    <th>Занято</th><td>{{samples_occupied}}</td>
+                </tr>
+                <tr>
+                    <th>Свободно</th><td>{{samples_free}}</td>
+                </tr>
+            </table>
+            <table class="table_samples">
+                <tbody>
+                  {% for row in samples_grid %}
+                  <tr>
+                    {% for sample in row %}
+                    <td class="storage-cell">
+                        {% if sample.sample_id != -1 %}
+                        <div class="red-circle">
+                        <a href="{% url 'single_biospecimen' biospecimen_id=sample.sample_id %}"></a>
+                        </div>
+                        {% else %}
+                        <div class="green-circle"></div>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              
+        </div>
+{% endblock %}

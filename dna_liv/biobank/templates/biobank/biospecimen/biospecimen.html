@@ -1,0 +1,47 @@
+<!--Страница зарегистрированных биологических образцов-->
+
+{% extends 'biobank/biobank_layout.html' %}
+
+{% block title %}Биологические образцы{% endblock %}
+{% block content %}
+<div class="features">
+    <!-- Блок с названием раздела + кнопка добавить -->
+    <div class="title_object">
+        <p>
+            <span class="larger-text">Биологические образцы</span>
+            <a href="{% url 'sample_update' biospecimen_id=biospecimen.id%}">
+                <button>Изменить</button>
+            </a>
+            
+        </p>
+    </div>
+    
+    {{ username }}<br>
+    <!-- Вывод таблицы о существующих биологических образцах -->
+    <table>
+        <!-- Итерируемые строки биологических образцов, получаемых из БД -->
+        <tbody>
+                <tr>
+                    <td class="table_property">Название</td>
+                    <td class="table_value">{{ biospecimen.title }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Тестовое поле</td>
+                    <td class="table_value">{{ biospecimen.test_field }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Дата</td>
+                    <td class="table_value">{{ biospecimen.date }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Место хранения</td>
+                    <td class="table_value">{{ biospecimen.name_storage_sample }}</td>
+                </tr>
+                <tr>
+                    <td class="table_property">Файл</td>
+                    <td class="table_value"><a href="{{ biospecimen.file.url }}" download>{{ biospecimen.file_name }}</a></td>
+                </tr>
+        </tbody>
+    </table>   
+</div>
+{% endblock %}
